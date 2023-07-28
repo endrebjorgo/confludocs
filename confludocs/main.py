@@ -9,7 +9,8 @@ import importlib
 def detect_lib_in_dir(path):
     """Get Path of folder containing library within directory.
 
-    The function looks for a directory directly under this one which contains some file named "__init__.py". 
+    The function looks for a directory directly under this one which contains
+    some file named "__init__.py".
 
     Args:
         path (str): String containing directory path
@@ -30,6 +31,7 @@ def detect_lib_in_dir(path):
                 return item
     return False
 
+
 dir_path_str = "/Users/endrebjorgo/Documents/Utvikling/Prosjekter/dummylib/"
 dir_path = pathlib.Path(dir_path_str)
 
@@ -37,10 +39,10 @@ lib_path = detect_lib_in_dir(dir_path_str)
 lib_name = lib_path.name
 
 sys.path.append(dir_path_str)
-#lib = importlib.import_module(lib_name) # lib.pkg.mod...
+# lib = importlib.import_module(lib_name)  lib.pkg.mod...
 
 
-def import_submodules(lib_path, curr_path = [lib_path.stem]):  
+def import_submodules(lib_path, curr_path=[lib_path.stem]):
     for item in lib_path.iterdir():
         if item.name in ["__pycache__", "__init__.py"]:
             continue
@@ -52,7 +54,7 @@ def import_submodules(lib_path, curr_path = [lib_path.stem]):
 
         if item.is_dir():
             import_submodules(item, this_path)
-            
+
 
 import_submodules(lib_path)
 
@@ -64,10 +66,11 @@ print(clsmembers)
 
 """
 To do time:
-- Get a list of all import strings (lib.pkg.mod...) so that they can be analyzed with getmembers.
+- Get a list of all import strings (lib.pkg.mod...) so that they can be
+  analyzed with getmembers.
 - Generate markdown from the module
 - Analyzing functions:
  - name = func.__name__
  - variables = func.__code__.co_varnames
- - docstring = func.__doc__ 
+ - docstring = func.__doc__
 """
